@@ -8,7 +8,6 @@ import tkinter as tk
 from elec_vis_func import *
 
 elec_vis_dir  = os.path.dirname(os.path.realpath(__file__))
-MRIcroGL_path = os.path.join(elec_vis_dir, 'MRIcroGL', 'MRIcroGL')
 script_path   = os.path.join(elec_vis_dir, 'MRIcroGL_script.py')
 
 # Specify patient name and select electrode table & T1 scan
@@ -44,8 +43,9 @@ for index, row in tbl_data.iterrows():
     tbl_list.append(elec_cor_list)
 
 # Get screen size
-monitor_file = open('monitor.json')
-monitor_dict = json.load(monitor_file)
+config_file = open('config.json')
+config_dict = json.load(config_file)
+dir_MRIcroGL = config_dict["dir_MRIcroGL"]
 
 # Create temporary json for subprocess to access
 data_dict = {
@@ -58,13 +58,14 @@ data_dict = {
     "output_dir_MNI_AAL" : output_dir_MNI_AAL,
     "tbl_list"           : tbl_list
 }
-data_dict.update(monitor_dict)
+data_dict.update(config_dict)
 json_object = json.dumps(data_dict, indent = 4)
 with open("tmp.json", "w") as tmp:
     tmp.write(json_object)
 
 # Call subprocess
-subprocess.call([MRIcroGL_path, script_path])
+path_MRIcroGL = os.path.join(dir_MRIcroGL, 'MRIcroGL')
+subprocess.call([path_MRIcroGL, script_path])
 
 # Move tmp.json to output directory
 shutil.move('tmp.json', os.path.join(output_dir, 'parameters.json'))

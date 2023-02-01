@@ -7,17 +7,17 @@ tmp_file = open('tmp.json')
 data = json.load(tmp_file)
 
 keys = [
-    "elec_vis_dir", "patient_name",
-    "path_tbl", "path_t1",
+    "patient_name", "path_t1",
     "output_dir_native", "output_dir_MNI", "output_dir_MNI_AAL",
     "tbl_list",
-    "monitor_width", "monitor_height"]
+    "monitor_width", "monitor_height",
+    "dir_MRIcroGL"]
 
-(elec_vis_dir, patient_name, 
-path_tbl, path_t1, 
+(patient_name, path_t1, 
 output_dir_native, output_dir_MNI, output_dir_MNI_AAL,
 tbl_list,
-monitor_width, monitor_height) = [
+monitor_width, monitor_height,
+dir_MRIcroGL) = [
     data.get(key) for key in keys]
 
 # Width : height = 3:4, determine size
@@ -28,9 +28,9 @@ else:
     window_width = monitor_width
     window_height = round(window_width * 1.33)
 
-MNI_path = os.path.join('.', 'MRIcroGL', 'Resources',
+MNI_path = os.path.join(dir_MRIcroGL, 'Resources',
                         'standard', 'mni152.nii.gz')
-AAL_path = os.path.join('.', 'MRIcroGL', 'Resources', 'atlas', 'aal.nii.gz')
+AAL_path = os.path.join(dir_MRIcroGL, 'Resources', 'atlas', 'aal.nii.gz')
 
 # Set up canvas
 gl.resetdefaults()
