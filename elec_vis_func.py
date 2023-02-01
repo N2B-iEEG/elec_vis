@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import tkinter as tk
 import tkinter.filedialog
 from PIL import Image, ImageFont, ImageDraw
@@ -65,20 +66,21 @@ def elec_vis_annotate(output_dir):
         img_name     = os.path.split(img_path)[1]
         patient_name = img_name.split('_')[0]
         elec_name    = img_name.split('_')[1]
-        space_name = img_name.split('_')[2]
-        space_name = os.path.splitext(space_name)[0]
+        space_name   = img_name.split('_')[2]
+        space_name   = os.path.splitext(space_name)[0]
 
         img          = Image.open(img_path)
         img_box      = img.getbbox()
         img          = img.crop(img_box)
-
-        new_img = Image.new("RGBA", img.size, "WHITE") # Create a white rgba background
-        new_img.paste(img, (0, 0), img)              # Paste the image on the background. Go to the links given below for details.
-        img = new_img
+        
+        if np.array(img).shape[2] == 4: # If image output is .png with transparent background
+            new_img = Image.new("RGBA", img.size, "BLACK") # Create a black rgba background
+            new_img.paste(img, (0, 0), img)                # Paste the image on the background.
+            img = new_img
         
         img_width    = img.size[0]
         img_height   = img.size[1]
-        font_size = min(img_width, img_height) / 20
+        font_size = min(img_width, img_height) / 25
 
         img_draw     = ImageDraw.Draw(img)
         font         = ImageFont.truetype('arial.ttf', int(font_size))
@@ -87,6 +89,8 @@ def elec_vis_annotate(output_dir):
         'Brain space:\n    ' + space_name])
 
         img_draw.multiline_text((img_width/2, img_height/2), 
-        text, 
-        font = font, fill = (0, 0, 0))
+        text,
+        font = font, 
+        fill = (255, 255, 255) # Font color = white (against black background)
+        )
         img.save(img_path)

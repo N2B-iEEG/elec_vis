@@ -20,7 +20,7 @@ GitHub release at https://github.com/rordenlab/MRIcroGL. Download links:
 # How to use
 - Install the [dependencies](#Dependencies)
 - In [config.json](config.json), enter your monitor's width and height (in pixel) and MRIcroGL directory. Knowledge of screen size allows MRIcroGL to choose a window size appropriate for visualization
-- Prepare an electrode table that has the following columns (output of reconstruction). A demo table can be found at [demo/demo.xlsx](demo/demo.xlsx).
+- Prepare an electrode table that has the following columns (output of reconstruction). A demo table can be found at [demo/demo.csv](demo/demo.csv). The table can be comma-separated (.csv) or an excel spreadsheet (xls, xlsx, xlsm, etc.)
   - `channel` (e.g. LAMu)
   - `native_x` (in mm, so below)
   - `native_y`
@@ -37,9 +37,9 @@ GitHub release at https://github.com/rordenlab/MRIcroGL. Download links:
   - Click OK once selection is complete (will yield error if file selection was not complete/successful) 
   - Lie down and watch MRIcroGL do the job!
   - Check the results in the directory of electrode table, in a new folder named `{patient_name} + elec_vis`. It has three subfolders:
-    - `native`: electrode locations in the patient's native brain space
-    - `MNI`: electrode locations in MNI space without overlay of atlas
-    - `MNI_AAL`: electrode locations in MNI space with AAL atlas overlaid
+    - `native`: electrode locations in the patient's native brain space ![example native](readme_screenshots/example_native.png)
+    - `MNI`: electrode locations in MNI space without overlay of atlas ![example MNI](readme_screenshots/example_MNI.png)
+    - `MNI_AAL`: electrode locations in MNI space with AAL atlas overlaid ![example MNI+AAL](readme_screenshots/example_MNI_AAL.png)
   
 # Disclaimer
 Visualization results are dependent on outputs of anatomical reconstruction (e.g., https://doi.org/10.1038/s41596-018-0009-6). For research purposes only.

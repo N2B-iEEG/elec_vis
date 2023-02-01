@@ -30,8 +30,15 @@ output_dir_MNI_AAL = os.path.join(output_dir, 'MNI_AAL')
 os.mkdir(output_dir_MNI_AAL)
 
 # Read electrode table
-tbl_data = pd.read_excel(path_tbl)
-tbl_data = tbl_data.reset_index()  # make sure indexes pair with number of rows
+tbl_name, tbl_extension = os.path.splitext(path_tbl)
+if tbl_extension == '.csv':
+    tbl_data = pd.read_csv(path_tbl)
+elif tbl_extension == '.xlsx':
+    tbl_data = pd.read_excel(path_tbl)
+
+tbl_data.dropna(axis = 0, how = 'all', inplace = True) # Drop empty rows
+tbl_data.dropna(axis = 1, how = 'all', inplace = True) # Drop empty columns
+tbl_data = tbl_data.reset_index()                      # Make sure indexes pair with number of rows
 
 # Convert table to a nested list
 tbl_list = []

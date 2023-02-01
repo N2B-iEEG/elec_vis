@@ -36,12 +36,12 @@ AAL_path = os.path.join(dir_MRIcroGL, 'Resources', 'atlas', 'aal.nii.gz')
 gl.resetdefaults()
 gl.windowposition(0, 0, window_width, window_height)
 
-gl.backcolor(255, 255, 255) # Background color: white
+gl.backcolor(0, 0, 0)       # Background color: black
 gl.colorbarposition(0)      # Disable color bar
 gl.toolformvisible(0)       # Hide tool panel
 gl.scriptformvisible(0)     # Hide script panel
 gl.bmpzoom(1)               # Save bitmaps at screen resolution
-gl.linecolor(225, 0, 225)   # Crosshair color (purple)
+gl.linecolor(0, 108, 102)   # Crosshair color (Greenish blue)
 gl.linewidth(5)             # Crosshair width
 
 # Visualization in native space
