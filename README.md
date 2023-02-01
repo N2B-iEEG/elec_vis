@@ -19,7 +19,7 @@ GitHub release at https://github.com/rordenlab/MRIcroGL. Download links:
 
 # How to use
 - Install the [dependencies](#Dependencies)
-- In [monitor.json](monitor.json), enter your monitor's width and height (in pixel) and MRIcroGL directory. Knowledge of screen size allows MRIcroGL to choose a window size appropriate for visualization
+- In [config.json](config.json), enter your monitor's width and height (in pixel) and MRIcroGL directory. Knowledge of screen size allows MRIcroGL to choose a window size appropriate for visualization
 - Prepare an electrode table that has the following columns (output of reconstruction). A demo table can be found at [demo/demo.xlsx](demo/demo.xlsx).
   - `channel` (e.g. LAMu)
   - `native_x` (in mm, so below)
