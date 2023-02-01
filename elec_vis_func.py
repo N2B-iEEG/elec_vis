@@ -11,7 +11,7 @@ def elec_vis_file_select():
     win = tk.Tk()
     win.title('N2B elec_vis file dialog')
     win.resizable(True, True)
-    win.geometry('800x200')
+    win.geometry('800x400')
 
     tk.Label(win, text='Patient name').grid(row=0, column=0, sticky='w')
     df_name = tk.StringVar()
@@ -35,7 +35,7 @@ def elec_vis_file_select():
         global path_t1
         path_t1 = tk.filedialog.askopenfilename()
         t1_label.config(text = path_t1)
-    tk.Button(win, text = "Select the patient's T1-weighted MR\n(brain.mgz if using Freesurfer for preprocessing)", 
+    tk.Button(win, text = "Select the patient's T1-weighted MR\n(brain.mgz if using FreeSurfer for preprocessing)", 
     command=t1_cmd).grid(row=2, column=0, sticky='w')
 
     # Button for closing

@@ -18,9 +18,9 @@ GitHub release at https://github.com/rordenlab/MRIcroGL. Download links:
   - Windows https://github.com/rordenlab/MRIcroGL/releases/latest/download/MRIcroGL_windows.zip
 
 # How to use
-- Download the [dependencies](#Dependencies)
+- Install the [dependencies](#Dependencies)
 - In [monitor.json](monitor.json), enter your monitor's width and height (in pixel) and MRIcroGL directory. Knowledge of screen size allows MRIcroGL to choose a window size appropriate for visualization
-- Prepare an electrode table that has the following columns (output of reconstruction)
+- Prepare an electrode table that has the following columns (output of reconstruction). A demo table can be found at [demo/demo.xlsx](demo/demo.xlsx).
   - `channel` (e.g. LAMu)
   - `native_x` (in mm, so below)
   - `native_y`
@@ -29,7 +29,7 @@ GitHub release at https://github.com/rordenlab/MRIcroGL. Download links:
   - `MNI_y`
   - `MNI_z`
 - Patient's MRI scan that was used for reconstruction
-  - Usually `brain.mgz` if using Freesurfer for preprocessing
+  - Usually `brain.mgz` if using FreeSurfer for preprocessing. A demo scan be found at [demo/brain.mgz](demo/brain.mgz)
 - Run [elec_vis.py](elec_vis.py)
   - A GUI (created by tkinter) will pop up ![unfilled file dialog](readme_screenshots/file_dialog_unfilled.png)
   - Enter patient's ID in the entry box (prefix "TWH" is automatically given but not necessary)
