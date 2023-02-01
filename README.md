@@ -33,7 +33,7 @@ elec_vis
 
 # How to use
 - Download the [dependencies](#Dependencies)
-- Enter your monitor's width and height (in pixel) in [monitor.txt](monitor.json). This helps MRIcroGL choose a window size appropriate for visualization
+- Enter your monitor's width and height (in pixel) in [monitor.json](monitor.json). This helps MRIcroGL choose a window size appropriate for visualization
 - Prepare an electrode table that has the following columns (output of reconstruction)
   - `channel` (e.g. LAMu)
   - `native_x` (in mm, so below)
