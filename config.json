@@ -1,5 +1,5 @@
 {
-    "monitor_width"  : 3840,
-    "monitor_height" : 2160,
-    "dir_MRIcroGL"  : "C:\\Users\\Qian\\Desktop\\MRIcroGL"
+    "monitor_width"  : 1920,
+    "monitor_height" : 1080,
+    "dir_MRIcroGL"  : "/home/qian/MRIcroGL"
 }

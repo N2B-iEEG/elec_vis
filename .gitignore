@@ -1,0 +1,4 @@
+__pycache__
+demo/*
+!demo/demo_T1.mgz
+!demo/demo.csv

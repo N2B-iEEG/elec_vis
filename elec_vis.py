@@ -62,7 +62,7 @@ data_dict = {
     "path_t1"            : path_t1,
     "output_dir_native"  : output_dir_native,
     "output_dir_MNI"     : output_dir_MNI,
-    "output_dir_MNI_AAL" : output_dir_MNI_AAL,
+    "output_dir_MNI_AAL" : output_dir_MNI_AAL,  
     "tbl_list"           : tbl_list
 }
 data_dict.update(config_dict)

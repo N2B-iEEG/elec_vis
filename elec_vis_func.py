@@ -1,59 +1,55 @@
 import os
 import numpy as np
-import tkinter as tk
-import tkinter.filedialog
 from PIL import Image, ImageFont, ImageDraw
+from tkinter import Tk, Label, Entry, Button, StringVar, font
+from tkinter.filedialog import askopenfilename
+from typing import Tuple
 
-def elec_vis_file_select():
-    global patient_name, path_tbl, path_t1
-    path_tbl = ''
-    path_t1  = ''
+def elec_vis_file_select() -> Tuple[str, str, str]:
 
-    win = tk.Tk()
-    win.title('N2B elec_vis file dialog')
-    win.resizable(True, True)
-    win.geometry('800x400')
+    def select_table_file():
+        file_path = askopenfilename(filetypes=[('Table files', '*.csv *.xlsx')])
+        path_tbl.set(file_path)
+        if file_path:  # Check if a file was selected
+            btn_table['text'] = file_path
 
-    tk.Label(win, text='Patient name').grid(row=0, column=0, sticky='w')
-    df_name = tk.StringVar()
-    df_name.set("TWH")
-    patient_name_entry = tk.Entry(win, textvariable=df_name)
-    patient_name_entry.grid(row=0, column=1, sticky='w')
+    def select_t1_file():
+        file_path = askopenfilename(filetypes=[('Nifti files', '*.nii *.nii.gz *.mgh *.mgz')])
+        path_t1.set(file_path)
+        if file_path:  # Check if a file was selected
+            btn_t1['text'] = file_path
 
-    tbl_label = tk.Label(win, text='')
-    t1_label  = tk.Label(win, text='')
-    tbl_label.grid(row=1, column=1, sticky='w')
-    t1_label.grid(row=2, column=1, sticky='w')
+    def submit():
+        root.destroy()
 
-    def elec_tbl_cmd():
-        global path_tbl
-        path_tbl = tk.filedialog.askopenfilename()
-        tbl_label.config(text = path_tbl)
-    tk.Button(win, text = 'Select electrode table\n(must contain channel name and coordinates in native & MNI space)', 
-    command=elec_tbl_cmd).grid(row=1, column=0, sticky='w')
+    root = Tk()
+    root.title('N2B elec_vis file dialog')
+    root.resizable(True, True)
+    root.geometry('1000x300')
 
-    def t1_cmd():
-        global path_t1
-        path_t1 = tk.filedialog.askopenfilename()
-        t1_label.config(text = path_t1)
-    tk.Button(win, text = "Select the patient's T1-weighted MR\n(brain.mgz if using FreeSurfer for preprocessing)", 
-    command=t1_cmd).grid(row=2, column=0, sticky='w')
+    # Define the font
+    customFont = font.Font(family="Georgia", size=30)
 
-    # Button for closing
-    def close_cmd():
-        global patient_name
-        patient_name = patient_name_entry.get()
-        if path_tbl == "":
-            tk.messagebox.showerror('Error', 'Error: no electrode table is selected!')
-        if path_t1 == "":
-            tk.messagebox.showerror('Error', 'Error: no T1 scan is selected!')
-        if path_tbl != "" and path_t1 != "":
-            win.destroy()
-    tk.Button(win, text="OK", command=close_cmd).grid(row=5, column=1, sticky='w')
+    patient_name = StringVar(value='TWH')
+    path_tbl = StringVar()
+    path_t1 = StringVar()
 
-    tk.mainloop()
+    Label(root, text="Patient name", font=customFont).grid(row=0, column=0)
+    Entry(root, textvariable=patient_name, font=customFont).grid(row=0, column=1)
 
-    return patient_name, path_tbl, path_t1
+    Label(root, text="Select elec table", font=customFont).grid(row=1, column=0)
+    btn_table = Button(root, text="Browse...", command=select_table_file, font=customFont)
+    btn_table.grid(row=1, column=1)
+
+    Label(root, text="Select patient T1", font=customFont).grid(row=2, column=0)
+    btn_t1 = Button(root, text="Browse...", command=select_t1_file, font=customFont)
+    btn_t1.grid(row=2, column=1)
+
+    Button(root, text="Submit", command=submit, font=customFont).grid(row=3, columnspan=2)
+
+    root.mainloop()
+
+    return patient_name.get(), path_tbl.get(), path_t1.get()
 
 def elec_vis_annotate(output_dir):
     img_path_list = []
@@ -83,7 +79,7 @@ def elec_vis_annotate(output_dir):
         font_size = min(img_width, img_height) / 25
 
         img_draw     = ImageDraw.Draw(img)
-        font         = ImageFont.truetype('arial.ttf', int(font_size))
+        font         = ImageFont.truetype('SourceCodePro-Regular.ttf', int(font_size))
         text         = '\n\n'.join(['Patient name:\n    '+ patient_name, 
         'Electrode name:\n    ' + elec_name, 
         'Brain space:\n    ' + space_name])
