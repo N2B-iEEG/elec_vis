@@ -8,7 +8,7 @@ from typing import Tuple
 def elec_vis_file_select() -> Tuple[str, str, str]:
 
     def select_table_file():
-        file_path = askopenfilename(filetypes=[('Table files', '*.csv *.xlsx')])
+        file_path = askopenfilename(filetypes=[('Table files', '*.csv *xls *.xlsx')])
         path_tbl.set(file_path)
         if file_path:  # Check if a file was selected
             btn_table['text'] = file_path
@@ -28,7 +28,7 @@ def elec_vis_file_select() -> Tuple[str, str, str]:
     root.geometry('1000x300')
 
     # Define the font
-    customFont = font.Font(family="Georgia", size=30)
+    customFont = font.Font(family="Georgia", size=20)
 
     patient_name = StringVar(value='TWH')
     path_tbl = StringVar()

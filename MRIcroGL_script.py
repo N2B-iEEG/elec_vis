@@ -3,6 +3,8 @@ import gl
 import os
 import json
 
+_thisDir = os.path.dirname(os.path.abspath(__file__))
+
 tmp_file = open('tmp.json')
 data = json.load(tmp_file)
 
